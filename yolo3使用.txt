@@ -1,0 +1,21 @@
+1.使用convert.py 将yolo3.weights转化为yolo_weights.h5并放至model_data文件夹下
+2.修改model_data/voc_classes.txt, 使用voc_annotation.py 生成2012_train.txt
+3.修改yolov3.cfg或者yolov3-tiny.cfg中的 filters, classes （random显存低时置0）
+
+filters=18 	#3*(4+1+class_num)
+activation=linear
+
+[yolo]
+mask = 1,2,3
+anchors = 10,14,  23,27,  37,58,  81,82,  135,169,  344,319
+classes=1	#class_num
+num=6
+jitter=.3
+ignore_thresh = .7
+truth_thresh = 1
+random=1
+
+
+4.运行kmeans.py计算anchors大小哦啊，并替换model_data文件夹下的yolo_anchors.txt或tiny_yolo_anchors.txt（重要）
+5.运行train.py 训练模型
+6.运行yolo_video看输出
